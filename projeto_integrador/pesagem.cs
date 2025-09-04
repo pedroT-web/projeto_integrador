@@ -36,5 +36,34 @@ namespace projeto_integrador
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            historico acessarHistorico = new historico();
+            acessarHistorico.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            index acessarIndex = new index();
+            acessarIndex.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            pesagem acessarPesagem = new pesagem();
+            acessarPesagem.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Login acessarLogin = new Login();
+            acessarLogin.ShowDialog();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

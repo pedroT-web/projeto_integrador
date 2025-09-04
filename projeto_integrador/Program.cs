@@ -16,7 +16,7 @@ namespace projeto_integrador
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new historico());
+            Application.Run(new index());
         }
     }
 }
