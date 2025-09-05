@@ -52,9 +52,9 @@ namespace projeto_integrador
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string conexaoBanco = "server=localhost;user id=root;password=;database=projeto_integrador";
+            conexaoBanco();
 
-            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco))
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
             {
                 try
                 {
@@ -79,6 +79,63 @@ namespace projeto_integrador
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conexao.Open();
+                    string script = "SELECT * FROM historico_mensal";
+
+                    MySqlCommand cmd = new MySqlCommand(script, conexao);
+                    MySqlDataAdapter adaptar = new MySqlDataAdapter(cmd);
+                    DataTable tabela_mensal = new DataTable();
+                    adaptar.Fill(tabela_mensal);
+
+                    TabelaHistorico.DataSource = tabela_mensal;
+                    conexao.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        private string conexaoBanco()
+        {
+            string conexaoBanco = "server=localhost;user id=root;password=;database=projeto_integrador";
+            return conexaoBanco;
+        }
+
+        private void Botao_Anual_Click(object sender, EventArgs e)
+        {
+            conexaoBanco();
+
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conexao.Open();
+                    string script = "SELECT * FROM historico_anual";
+
+                    MySqlCommand cmd = new MySqlCommand(script, conexao);
+                    MySqlDataAdapter adaptar = new MySqlDataAdapter(cmd);
+                    DataTable tabela_anual = new DataTable();
+                    adaptar.Fill(tabela_anual);
+
+                    TabelaHistorico.DataSource = tabela_anual;
+                    conexao.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

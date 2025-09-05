@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,27 @@ namespace projeto_integrador
 
         private void pesagem_Load(object sender, EventArgs e)
         {
+            conexaoBanco();
 
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conexao.Open();
+                    string script = "SELECT * FROM historico_diario";
+                    MySqlCommand cmd = new MySqlCommand(script, conexao);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela_diario = new DataTable();
+                    adaptador.Fill(tabela_diario);
+
+                    GridHistoricoDiario.DataSource = tabela_diario;
+                    conexao.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -63,7 +84,33 @@ namespace projeto_integrador
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            conexaoBanco();
 
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conexao.Open();
+                    string script = "SELECT * FROM historico_diario";
+                    MySqlCommand cmd = new MySqlCommand(script, conexao);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela_diario = new DataTable();
+                    adaptador.Fill(tabela_diario);
+
+                    GridHistoricoDiario.DataSource = tabela_diario;
+                    conexao.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        
+        private string conexaoBanco()
+        {
+            string conexaoBanco = "server=localhost;user id=root;password=;database=projeto_integrador";
+            return conexaoBanco;
         }
     }
 }
