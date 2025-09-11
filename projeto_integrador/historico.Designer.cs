@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(historico));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -38,6 +36,7 @@
             this.Botao_mensal = new System.Windows.Forms.Button();
             this.Botao_Anual = new System.Windows.Forms.Button();
             this.TabelaHistorico = new System.Windows.Forms.DataGridView();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabelaHistorico)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +44,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button3);
@@ -53,21 +51,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1603, 100);
             this.panel1.TabIndex = 0;
-            // 
-            // button5
-            // 
-            this.button5.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(1488, 11);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(78, 74);
-            this.button5.TabIndex = 20;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -156,15 +139,28 @@
             this.TabelaHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.TabelaHistorico.Location = new System.Drawing.Point(574, 197);
             this.TabelaHistorico.Name = "TabelaHistorico";
-            this.TabelaHistorico.Size = new System.Drawing.Size(440, 461);
+            this.TabelaHistorico.Size = new System.Drawing.Size(440, 625);
             this.TabelaHistorico.TabIndex = 4;
             this.TabelaHistorico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(148)))), ((int)(((byte)(30)))));
+            this.button6.Font = new System.Drawing.Font("Arial Narrow", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(1298, 767);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(167, 55);
+            this.button6.TabIndex = 18;
+            this.button6.Text = "Gerar Relário";
+            this.button6.UseVisualStyleBackColor = false;
             // 
             // historico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1604, 749);
+            this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.TabelaHistorico);
             this.Controls.Add(this.Botao_Anual);
             this.Controls.Add(this.Botao_mensal);
@@ -183,7 +179,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -191,5 +186,6 @@
         private System.Windows.Forms.Button Botao_mensal;
         private System.Windows.Forms.Button Botao_Anual;
         private System.Windows.Forms.DataGridView TabelaHistorico;
+        private System.Windows.Forms.Button button6;
     }
 }

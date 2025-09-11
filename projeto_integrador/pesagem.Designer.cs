@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pesagem));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -38,12 +37,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBoxPeso = new System.Windows.Forms.TextBox();
+            this.BoxData = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxMaterial = new System.Windows.Forms.ComboBox();
+            this.comboBoxFuncionario = new System.Windows.Forms.ComboBox();
             this.GridHistoricoDiario = new System.Windows.Forms.DataGridView();
             this.button6 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,7 +53,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
@@ -64,20 +62,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(2139, 100);
             this.panel1.TabIndex = 0;
-            // 
-            // button5
-            // 
-            this.button5.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(1499, 16);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(78, 74);
-            this.button5.TabIndex = 17;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -169,22 +153,22 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Peso";
             // 
-            // textBox1
+            // textBoxPeso
             // 
-            this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(158, 479);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(493, 29);
-            this.textBox1.TabIndex = 7;
+            this.textBoxPeso.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPeso.Location = new System.Drawing.Point(158, 479);
+            this.textBoxPeso.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPeso.Name = "textBoxPeso";
+            this.textBoxPeso.Size = new System.Drawing.Size(493, 29);
+            this.textBoxPeso.TabIndex = 7;
             // 
-            // dateTimePicker1
+            // BoxData
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(158, 592);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(556, 22);
-            this.dateTimePicker1.TabIndex = 8;
+            this.BoxData.CalendarFont = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoxData.Location = new System.Drawing.Point(158, 592);
+            this.BoxData.Name = "BoxData";
+            this.BoxData.Size = new System.Drawing.Size(556, 22);
+            this.BoxData.TabIndex = 8;
             // 
             // label4
             // 
@@ -209,36 +193,28 @@
             this.comboBox1.Size = new System.Drawing.Size(65, 30);
             this.comboBox1.TabIndex = 11;
             // 
-            // comboBox2
+            // comboBoxMaterial
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBoxMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxMaterial.FormattingEnabled = true;
+            this.comboBoxMaterial.Items.AddRange(new object[] {
             "Recíclavel",
             "Não Recíclavel"});
-            this.comboBox2.Location = new System.Drawing.Point(158, 368);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(556, 32);
-            this.comboBox2.TabIndex = 12;
+            this.comboBoxMaterial.Location = new System.Drawing.Point(158, 368);
+            this.comboBoxMaterial.Name = "comboBoxMaterial";
+            this.comboBoxMaterial.Size = new System.Drawing.Size(556, 32);
+            this.comboBoxMaterial.TabIndex = 12;
+            this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // comboBox3
+            // comboBoxFuncionario
             // 
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "Pedro",
-            "Victor",
-            "Keno",
-            "Vagner",
-            "Paulo",
-            "Caua",
-            "Thais",
-            "Brian",
-            "Baruque"});
-            this.comboBox3.Location = new System.Drawing.Point(156, 251);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(558, 32);
-            this.comboBox3.TabIndex = 13;
+            this.comboBoxFuncionario.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFuncionario.FormattingEnabled = true;
+            this.comboBoxFuncionario.Location = new System.Drawing.Point(156, 251);
+            this.comboBoxFuncionario.Name = "comboBoxFuncionario";
+            this.comboBoxFuncionario.Size = new System.Drawing.Size(558, 32);
+            this.comboBoxFuncionario.TabIndex = 13;
+            this.comboBoxFuncionario.SelectedIndexChanged += new System.EventHandler(this.comboBoxFuncionario_SelectedIndexChanged);
             // 
             // GridHistoricoDiario
             // 
@@ -258,8 +234,9 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(167, 55);
             this.button6.TabIndex = 17;
-            this.button6.Text = "Gerar Relário";
+            this.button6.Text = "Enviar";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label6
             // 
@@ -279,12 +256,12 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.GridHistoricoDiario);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBoxFuncionario);
+            this.Controls.Add(this.comboBoxMaterial);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BoxData);
+            this.Controls.Add(this.textBoxPeso);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -310,17 +287,16 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox textBoxPeso;
+        private System.Windows.Forms.DateTimePicker BoxData;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBoxMaterial;
+        private System.Windows.Forms.ComboBox comboBoxFuncionario;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView GridHistoricoDiario;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label6;
     }

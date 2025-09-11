@@ -36,7 +36,6 @@
             this.botaoHistorico = new System.Windows.Forms.Button();
             this.botaoInicio = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.botaoLogin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -122,7 +121,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.panel1.Controls.Add(this.botaoLogin);
             this.panel1.Controls.Add(this.botaoPesagem);
             this.panel1.Controls.Add(this.botaoHistorico);
             this.panel1.Controls.Add(this.botaoInicio);
@@ -131,20 +129,6 @@
             this.panel1.Size = new System.Drawing.Size(1608, 101);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // botaoLogin
-            // 
-            this.botaoLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.botaoLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.botaoLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.botaoLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botaoLogin.Image = ((System.Drawing.Image)(resources.GetObject("botaoLogin.Image")));
-            this.botaoLogin.Location = new System.Drawing.Point(1498, 12);
-            this.botaoLogin.Name = "botaoLogin";
-            this.botaoLogin.Size = new System.Drawing.Size(78, 74);
-            this.botaoLogin.TabIndex = 2;
-            this.botaoLogin.UseVisualStyleBackColor = false;
-            this.botaoLogin.Click += new System.EventHandler(this.button1_Click);
             // 
             // index
             // 
@@ -176,7 +160,6 @@
         private System.Windows.Forms.Button botaoHistorico;
         private System.Windows.Forms.Button botaoInicio;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button botaoLogin;
     }
 }
 
