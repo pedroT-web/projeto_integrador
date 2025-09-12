@@ -30,18 +30,21 @@ namespace projeto_integrador
         {
             index acessarIndex = new index();
             acessarIndex.Show();
+            this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             pesagem acessarPesagem = new pesagem();
             acessarPesagem.Show();
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             historico acessarHistorico = new historico();
             acessarHistorico.Show();
+            this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
