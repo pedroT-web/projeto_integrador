@@ -29,7 +29,9 @@ namespace projeto_integrador
             {
                 index acessarPesagem = new index();
                 acessarPesagem.Show();
-            }else if(usuario != user && senha == password)
+                this.Hide();
+            }
+            else if(usuario != user && senha == password)
             {
                 MessageBox.Show("Usuário Incorreto, Digite o Usuário Novamente", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxUsuario.Clear();
@@ -49,7 +51,7 @@ namespace projeto_integrador
                 textBoxUsuario.Focus();
             }
 
-            this.Hide();
+            
         }
 
         private void labelUsuario_Click(object sender, EventArgs e)

@@ -1,14 +1,13 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace projeto_integrador
 {
@@ -21,8 +20,9 @@ namespace projeto_integrador
 
         private void pesagem_Load(object sender, EventArgs e)
         {
+            CarregarComboBoxFuncionario();
+            CarregarComboBoxMaterial();
 
-           
             conexaoBanco();
 
             using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
@@ -51,22 +51,7 @@ namespace projeto_integrador
             }
 
 
-            using (MySqlConnection conexaoFuncionarios = new MySqlConnection(conexaoBanco()))
-            {
-                try
-                {
-                    conexaoFuncionarios.Open();
-                    string selectFuncionarios = "SELECT * FROM tb_funcionario";
-                    MySqlCommand cmdFuncionarios = new MySqlCommand(selectFuncionarios, conexaoFuncionarios);
-                    MySqlDataAdapter adaptarSelect = new MySqlDataAdapter();
-                    comboBoxFuncionario.DataSource = adaptarSelect;
-                    conexaoFuncionarios.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -126,32 +111,49 @@ namespace projeto_integrador
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string funcionario = comboBoxFuncionario.Text;
-            string material = comboBoxMaterial.Text;
-            double peso = Convert.ToDouble(textBoxPeso.Text);
+            int funcionario = Convert.ToInt32(comboBoxFuncionario.SelectedValue);
+            int material = Convert.ToInt32(comboBoxMaterial.SelectedValue);
+
+            double peso = 0;
+
+
             string data = BoxData.Text;
+            if(comboBoxTipoPeso.Text == "G")
+            {
+                double pesoG = Convert.ToDouble(textBoxPeso.Text);
+                peso = pesoG / 1000;
+            }
+            else
+            {
+                peso = Convert.ToDouble(textBoxPeso.Text);
+            }
+
+            DateTime dataCad = DateTime.Parse(data);
+            string dataConvertida = dataCad.ToString("yyyy-MM-dd");
 
             conexaoBanco();
 
-            using (MySqlConnection conexao = new MySqlConnection())
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
             {
                 try
                 {
                     conexao.Open();
-                    string insert = "INSERT INTO cadastro_de_peso(peso, tipo_do_material, id_funcionarios, data) VALUES (@peso, @tipoMaterial, @funcinario, @data)";
+                    string insert = "INSERT INTO cadastro_de_peso(peso, tipo_do_material, id_funcionarios, data) VALUES (@peso, @tipoMaterial, @funcionario, @data)";
                     MySqlCommand cmd = new MySqlCommand(insert, conexao);
                     cmd.Parameters.AddWithValue("@peso", peso);
                     cmd.Parameters.AddWithValue("@tipoMaterial", material);
                     cmd.Parameters.AddWithValue("@funcionario", funcionario);
-                    cmd.Parameters.AddWithValue("@data", data);
+                    cmd.Parameters.AddWithValue("@data", dataConvertida);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Peso Cadastrado Com sucesso", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro de conexão com o banco de dados: \n{ex.Message}" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                this.Refresh();
             }
         }
 
@@ -171,42 +173,69 @@ namespace projeto_integrador
         }
 
         // Função para popular o ComboBox
-        private void CarregarComboBox()
+        private void CarregarComboBoxFuncionario()
         {
             conexaoBanco();
 
-            // 2.a consulta da tabela do banco 
-            string query = "SELECT nome_do_funcionario, id_funcionario FROM tb_funcionarios";
-
-            using (SqlConnection conn = new SqlConnection(conexaoBanco()))
+            using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
             {
                 try
                 {
                     conn.Open();
+                    // 2.a consulta da tabela do banco 
+                    string query = "SELECT nome_do_funcionario, id_funcionario FROM tb_funcionarios";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela = new DataTable();
+                    adaptador.Fill(tabela);
+                    comboBoxFuncionario.ValueMember = "id_funcionario";
+                    comboBoxFuncionario.DisplayMember = "nome_do_funcionario";
+                    comboBoxFuncionario.DataSource = tabela;
 
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    // Executa a Consulta, ExecuteReader() retorna os dados em formato de leitura, reader permite que voce leia linha por linha
-                    SqlDataReader reader = cmd.ExecuteReader();
 
-                    // Cria uma lista para armazenar os dados
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-
-                    // Vinculamento dos dados com o combo box
-                    comboBoxFuncionario.DataSource = dt;
-                    comboBoxFuncionario.DisplayMember = "nome_do_funcionario";    // O que será exibido no ComboBox
-                    comboBoxFuncionario.ValueMember = "id_funcionario"; // O valor associado ao item
-
-                    conn.Close();
-                }
-                catch (Exception ex) 
+                }catch (Exception ex)
                 {
-                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro ao carregar a lista de clientes: " + ex.Message);
                 }
             }
+        }
+        private void CarregarComboBoxMaterial()
+        {
+            conexaoBanco();
+            using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conn.Open();
+                    string consulta = "SELECT nome_material, id FROM materiais";
+                    MySqlCommand cmd = new MySqlCommand(consulta, conn);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela = new DataTable();
+                    adaptador.Fill(tabela);
+                    comboBoxMaterial.ValueMember = "id";
+                    comboBoxMaterial.DisplayMember = "nome_material";
+                    comboBoxMaterial.DataSource = tabela;
+                }catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados: \n{ex.Message}" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
-            // Opcional: Defina o estilo do ComboBox para não permitir digitação livre
-            comboBoxFuncionario.DropDownStyle = ComboBoxStyle.DropDownList;
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            cad_funcionario acessarCad = new cad_funcionario();
+            acessarCad.Show();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

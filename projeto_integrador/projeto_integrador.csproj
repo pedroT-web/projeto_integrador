@@ -98,6 +98,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cad-funcionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cad-funcionario.Designer.cs">
+      <DependentUpon>cad-funcionario.cs</DependentUpon>
+    </Compile>
     <Compile Include="historico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cad-funcionario.resx">
+      <DependentUpon>cad-funcionario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="historico.resx">
       <DependentUpon>historico.cs</DependentUpon>
     </EmbeddedResource>
