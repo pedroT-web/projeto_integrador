@@ -32,11 +32,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.Botao_diario = new System.Windows.Forms.Button();
-            this.Botao_mensal = new System.Windows.Forms.Button();
-            this.Botao_Anual = new System.Windows.Forms.Button();
+            this.BotaoHistorico = new System.Windows.Forms.Button();
             this.TabelaHistorico = new System.Windows.Forms.DataGridView();
             this.button6 = new System.Windows.Forms.Button();
+            this.BoxDataInicio = new System.Windows.Forms.DateTimePicker();
+            this.BoxDataFim = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabelaHistorico)).BeginInit();
             this.SuspendLayout();
@@ -94,52 +96,26 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // Botao_diario
+            // BotaoHistorico
             // 
-            this.Botao_diario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.Botao_diario.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_diario.ForeColor = System.Drawing.Color.White;
-            this.Botao_diario.Location = new System.Drawing.Point(383, 130);
-            this.Botao_diario.Name = "Botao_diario";
-            this.Botao_diario.Size = new System.Drawing.Size(272, 52);
-            this.Botao_diario.TabIndex = 1;
-            this.Botao_diario.Text = "Diário";
-            this.Botao_diario.UseVisualStyleBackColor = false;
-            this.Botao_diario.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // Botao_mensal
-            // 
-            this.Botao_mensal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.Botao_mensal.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_mensal.ForeColor = System.Drawing.Color.White;
-            this.Botao_mensal.Location = new System.Drawing.Point(651, 130);
-            this.Botao_mensal.Name = "Botao_mensal";
-            this.Botao_mensal.Size = new System.Drawing.Size(272, 52);
-            this.Botao_mensal.TabIndex = 2;
-            this.Botao_mensal.Text = "Mensal";
-            this.Botao_mensal.UseVisualStyleBackColor = false;
-            this.Botao_mensal.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // Botao_Anual
-            // 
-            this.Botao_Anual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.Botao_Anual.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_Anual.ForeColor = System.Drawing.Color.White;
-            this.Botao_Anual.Location = new System.Drawing.Point(920, 130);
-            this.Botao_Anual.Name = "Botao_Anual";
-            this.Botao_Anual.Size = new System.Drawing.Size(272, 52);
-            this.Botao_Anual.TabIndex = 3;
-            this.Botao_Anual.Text = "Anual";
-            this.Botao_Anual.UseVisualStyleBackColor = false;
-            this.Botao_Anual.Click += new System.EventHandler(this.Botao_Anual_Click);
+            this.BotaoHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
+            this.BotaoHistorico.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BotaoHistorico.ForeColor = System.Drawing.Color.White;
+            this.BotaoHistorico.Location = new System.Drawing.Point(1298, 143);
+            this.BotaoHistorico.Name = "BotaoHistorico";
+            this.BotaoHistorico.Size = new System.Drawing.Size(145, 41);
+            this.BotaoHistorico.TabIndex = 3;
+            this.BotaoHistorico.Text = "Gerar Histórico";
+            this.BotaoHistorico.UseVisualStyleBackColor = false;
+            this.BotaoHistorico.Click += new System.EventHandler(this.Botao_Anual_Click);
             // 
             // TabelaHistorico
             // 
             this.TabelaHistorico.AllowUserToOrderColumns = true;
             this.TabelaHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TabelaHistorico.Location = new System.Drawing.Point(574, 197);
+            this.TabelaHistorico.Location = new System.Drawing.Point(383, 197);
             this.TabelaHistorico.Name = "TabelaHistorico";
-            this.TabelaHistorico.Size = new System.Drawing.Size(440, 625);
+            this.TabelaHistorico.Size = new System.Drawing.Size(809, 625);
             this.TabelaHistorico.TabIndex = 4;
             this.TabelaHistorico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -155,16 +131,58 @@
             this.button6.Text = "Gerar Relário";
             this.button6.UseVisualStyleBackColor = false;
             // 
+            // BoxDataInicio
+            // 
+            this.BoxDataInicio.CalendarFont = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoxDataInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoxDataInicio.Location = new System.Drawing.Point(438, 143);
+            this.BoxDataInicio.Name = "BoxDataInicio";
+            this.BoxDataInicio.Size = new System.Drawing.Size(335, 26);
+            this.BoxDataInicio.TabIndex = 20;
+            // 
+            // BoxDataFim
+            // 
+            this.BoxDataFim.CalendarFont = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoxDataFim.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BoxDataFim.Location = new System.Drawing.Point(857, 143);
+            this.BoxDataFim.Name = "BoxDataFim";
+            this.BoxDataFim.Size = new System.Drawing.Size(335, 26);
+            this.BoxDataFim.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
+            this.label1.Location = new System.Drawing.Point(378, 144);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 25);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Início";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
+            this.label2.Location = new System.Drawing.Point(810, 144);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 25);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Fim";
+            // 
             // historico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.BoxDataFim);
+            this.Controls.Add(this.BoxDataInicio);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.TabelaHistorico);
-            this.Controls.Add(this.Botao_Anual);
-            this.Controls.Add(this.Botao_mensal);
-            this.Controls.Add(this.Botao_diario);
+            this.Controls.Add(this.BotaoHistorico);
             this.Controls.Add(this.panel1);
             this.Name = "historico";
             this.Text = "historico";
@@ -173,6 +191,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TabelaHistorico)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,10 +201,12 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button Botao_diario;
-        private System.Windows.Forms.Button Botao_mensal;
-        private System.Windows.Forms.Button Botao_Anual;
+        private System.Windows.Forms.Button BotaoHistorico;
         private System.Windows.Forms.DataGridView TabelaHistorico;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.DateTimePicker BoxDataInicio;
+        private System.Windows.Forms.DateTimePicker BoxDataFim;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -22,12 +22,6 @@ namespace projeto_integrador
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Login acessarLogin = new Login();
-            acessarLogin.ShowDialog();
-        }
-
         private void label1_Click(object sender, EventArgs e)
         {
 

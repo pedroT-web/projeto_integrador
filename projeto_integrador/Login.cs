@@ -31,13 +31,13 @@ namespace projeto_integrador
                 acessarPesagem.Show();
                 this.Hide();
             }
-            else if(usuario != user && senha == password)
+            else if (usuario != user && senha == password)
             {
                 MessageBox.Show("Usuário Incorreto, Digite o Usuário Novamente", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxUsuario.Clear();
                 textBoxUsuario.Focus();
-
-            }else if(usuario == user && senha != password)
+            }
+            else if (usuario == user && senha != password)
             {
                 MessageBox.Show("Senha Incorreta, Digite a senha novamente", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 textBoxSenha.Clear();
@@ -50,8 +50,6 @@ namespace projeto_integrador
                 textBoxSenha.Clear();
                 textBoxUsuario.Focus();
             }
-
-            
         }
 
         private void labelUsuario_Click(object sender, EventArgs e)
@@ -61,6 +59,11 @@ namespace projeto_integrador
 
         private void textBoxUsuario_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

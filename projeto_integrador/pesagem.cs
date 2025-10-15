@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -20,7 +23,11 @@ namespace projeto_integrador
 
         private void pesagem_Load(object sender, EventArgs e)
         {
+            DateTime dataAtual = DateTime.Now;
+
+
             CarregarComboBoxFuncionario();
+
             CarregarComboBoxMaterial();
 
             conexaoBanco();
@@ -30,11 +37,12 @@ namespace projeto_integrador
                 try
                 {
                     conexao.Open();
-                    string select = "SELECT hd.data AS data_do_historico, hd.soma_materiais, cp.id AS id_cadastro, cp.peso, cp.tipo_do_material, cp.id_funcionarios, cp.data AS data_cadastro FROM historico_diario hd JOIN cadastro_de_peso cp ON cp.id = hd.id";
+                    string select = "SELECT cad_peso.id, cad_peso.peso,cad_peso.data, tb_func.nome_do_funcionario, tb_func.id_funcionario, tb_mate.id_material, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data";
 
 
                     MySqlCommand cmd = new MySqlCommand(select, conexao);
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@data", dataAtual);
                     DataTable tabela_diario = new DataTable();
                     adaptador.Fill(tabela_diario);
 
@@ -47,10 +55,32 @@ namespace projeto_integrador
                     MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                
+
             }
 
 
+
+
+            carregarComboBoxMaterial();
+            carregarGrid();
+
+
+            //using (MySqlConnection conexaoFuncionarios = new MySqlConnection(conexaoBanco()))
+            //{
+            //    try
+            //    {
+            //        conexaoFuncionarios.Open();
+            //        string selectFuncionarios = "SELECT * FROM tb_funcionario";
+            //        MySqlCommand cmdFuncionarios = new MySqlCommand(selectFuncionarios, conexaoFuncionarios);
+            //        MySqlDataAdapter adaptarSelect = new MySqlDataAdapter();
+            //        comboBoxFuncionario.DataSource = adaptarSelect;
+            //        conexaoFuncionarios.Close();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
 
         }
 
@@ -114,11 +144,15 @@ namespace projeto_integrador
             int funcionario = Convert.ToInt32(comboBoxFuncionario.SelectedValue);
             int material = Convert.ToInt32(comboBoxMaterial.SelectedValue);
 
+
             double peso = 0;
 
 
+
+            peso = Convert.ToDouble(textBoxPeso.Text);
+
             string data = BoxData.Text;
-            if(comboBoxTipoPeso.Text == "G")
+            if (comboBoxTipoPeso.Text == "G")
             {
                 double pesoG = Convert.ToDouble(textBoxPeso.Text);
                 peso = pesoG / 1000;
@@ -128,35 +162,51 @@ namespace projeto_integrador
                 peso = Convert.ToDouble(textBoxPeso.Text);
             }
 
-            DateTime dataCad = DateTime.Parse(data);
-            string dataConvertida = dataCad.ToString("yyyy-MM-dd");
+            DateTime dataAbreviada = DateTime.Parse(data);
+            string dataConvertida = dataAbreviada.ToString("yyyy-MM-dd");
 
             conexaoBanco();
 
             using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
             {
-                try
-                {
-                    conexao.Open();
-                    string insert = "INSERT INTO cadastro_de_peso(peso, tipo_do_material, id_funcionarios, data) VALUES (@peso, @tipoMaterial, @funcionario, @data)";
-                    MySqlCommand cmd = new MySqlCommand(insert, conexao);
-                    cmd.Parameters.AddWithValue("@peso", peso);
-                    cmd.Parameters.AddWithValue("@tipoMaterial", material);
-                    cmd.Parameters.AddWithValue("@funcionario", funcionario);
-                    cmd.Parameters.AddWithValue("@data", dataConvertida);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Peso Cadastrado Com sucesso", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                }
-                catch (Exception ex)
+                //conexao.Open();
+                //string insert = "INSERT INTO cadastro_de_peso(peso, tipo_do_material, id_funcionarios, data) VALUES (@peso, @tipoMaterial, @funcionario, @data)";
+                //MySqlCommand cmd = new MySqlCommand(insert, conexao);
+
+                using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
                 {
-                    MessageBox.Show("Erro de conexão com o banco de dados: \n{ex.Message}" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        conn.Open();
+                        string insert = "INSERT INTO cadastro_de_peso(peso, id_funcionarios, id_material, data) VALUES (@peso, @funcionario, @id_material ,@data_cadastro)";
+                        MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                        cmd.Parameters.AddWithValue("@peso", peso);
+                        cmd.Parameters.AddWithValue("@funcionario", funcionario);
+
+                        cmd.Parameters.AddWithValue("@data", dataConvertida);
+
+                        cmd.Parameters.AddWithValue("@id_material", material);
+                        cmd.Parameters.AddWithValue("@data_cadastro", dataConvertida);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Peso Cadastrado Com sucesso", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        carregarGrid();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro de conexão com o banco de dados: \n{ex.Message}" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    this.Refresh();
                 }
 
-                this.Refresh();
             }
         }
-
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -164,12 +214,7 @@ namespace projeto_integrador
 
         private void comboBoxFuncionario_SelectedIndexChanged(object sender, EventArgs e)
         {
-            conexaoBanco();
 
-            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
-            {
-
-            }
         }
 
         // Função para popular o ComboBox
@@ -192,13 +237,34 @@ namespace projeto_integrador
                     comboBoxFuncionario.DisplayMember = "nome_do_funcionario";
                     comboBoxFuncionario.DataSource = tabela;
 
-
-                }catch (Exception ex)
+                    conn.Close();
+                }
+                catch (Exception ex)
                 {
+
+                    // consulta da tabela do banco 
+                    //string query = "SELECT id_funcionario, nome_do_funcionario FROM tb_funcionarios";
+                    //MySqlCommand cmd = new MySqlCommand(query, conn);
+                    //MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    //DataTable tabela = new DataTable();
+                    //adaptador.Fill(tabela);
+
+                    //DataRow linhaVazia = tabela.NewRow();
+                    //linhaVazia["id_funcionario"] = DBNull.Value;
+                    //linhaVazia["nome_do_funcionario"] = ""; // Ou "Selecione..."
+                    //tabela.Rows.InsertAt(linhaVazia, 0);
+
+                    //comboBoxFuncionario.ValueMember = "id_funcionario";
+                    //comboBoxFuncionario.DisplayMember = "nome_do_funcionario";
+                    //comboBoxFuncionario.DataSource = tabela;
+
+
+
                     MessageBox.Show("Erro ao carregar a lista de clientes: " + ex.Message);
                 }
             }
         }
+
         private void CarregarComboBoxMaterial()
         {
             conexaoBanco();
@@ -207,15 +273,16 @@ namespace projeto_integrador
                 try
                 {
                     conn.Open();
-                    string consulta = "SELECT nome_material, id FROM materiais";
+                    string consulta = "SELECT nome_material, id_material FROM materiais";
                     MySqlCommand cmd = new MySqlCommand(consulta, conn);
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
                     DataTable tabela = new DataTable();
                     adaptador.Fill(tabela);
-                    comboBoxMaterial.ValueMember = "id";
+                    comboBoxMaterial.ValueMember = "id_material";
                     comboBoxMaterial.DisplayMember = "nome_material";
                     comboBoxMaterial.DataSource = tabela;
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show("Erro de conexão com o banco de dados: \n{ex.Message}" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -234,8 +301,74 @@ namespace projeto_integrador
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        { }
+        private void carregarComboBoxMaterial()
+        {
+            using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = "select id_material, nome_material FROM materiais";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela = new DataTable();
+                    adaptador.Fill(tabela);
+
+                    DataRow linhaVazia = tabela.NewRow(); // Nova linha de dados vazia utilizando a mesma estrutura da tabela declarada anteriormente
+                    linhaVazia["id_material"] = DBNull.Value; // define o valor da coluna id_funcionario como nulo
+                    linhaVazia["nome_material"] = ""; // define o valor da coluna nome_do_funcionario como vazio
+                    tabela.Rows.InsertAt(linhaVazia, 0); // Insere a nova linha vazia no indice 0 da comboBox
+
+                    comboBoxMaterial.DataSource = tabela; // Define a fonte de dados da comboBox
+                    comboBoxMaterial.ValueMember = "id_material"; // Define qual a coluna da fonte de dados que vamos utilizar como o valor interno dos itens do comboBox
+                    comboBoxMaterial.DisplayMember = "nome_material"; // Define qual a coluna da fonte de dados que vamos utilizar como valor externo dos itens da comboBox
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados " + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void carregarGrid()
         {
 
+
+
+            // Pega a data do dia atua
+            DateTime dataAtual = DateTime.Now;
+
+            string dataFormatada = dataAtual.ToString("yyyy-MM-dd");
+
+            conexaoBanco();
+
+            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            {
+                try
+                {
+                    conexao.Open();
+                    string select = "SELECT cad_peso.id, cad_peso.peso,cad_peso.data, tb_func.nome_do_funcionario, tb_func.id_funcionario, tb_mate.id_material, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data ORDER BY id";
+
+                    MySqlCommand cmd = new MySqlCommand(select, conexao);
+                    cmd.Parameters.AddWithValue("@data", dataFormatada);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela_diario = new DataTable();
+                    adaptador.Fill(tabela_diario);
+
+                    GridHistoricoDiario.DataSource = tabela_diario;
+
+                    conexao.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+            }
         }
     }
 }
