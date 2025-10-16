@@ -152,6 +152,7 @@ namespace projeto_integrador
             peso = Convert.ToDouble(textBoxPeso.Text);
 
             string data = BoxData.Text;
+
             if (comboBoxTipoPeso.Text == "G")
             {
                 double pesoG = Convert.ToDouble(textBoxPeso.Text);

@@ -21,9 +21,9 @@ namespace projeto_integrador
 
         private void historico_Load(object sender, EventArgs e)
         {
-            
 
-            
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -117,28 +117,72 @@ namespace projeto_integrador
 
         private void Botao_Anual_Click(object sender, EventArgs e)
         {
+            carregarPeriodo();
+
+            //conexaoBanco();
+
+            //using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            //{
+            //    try
+            //    {
+            //        conexao.Open();
+            //        string script = "SELECT * FROM historico_anual";
+
+            //        MySqlCommand cmd = new MySqlCommand(script, conexao);
+            //        MySqlDataAdapter adaptar = new MySqlDataAdapter(cmd);
+            //        DataTable tabela_anual = new DataTable();
+            //        adaptar.Fill(tabela_anual);
+
+            //        TabelaHistorico.DataSource = tabela_anual;
+            //        conexao.Close();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+        }
+
+        private void carregarPeriodo()
+        {
+            string dataInicio = BoxDataInicio.Text;
+            DateTime dataInicioAbreviada = DateTime.Parse(dataInicio);
+            string dataInicioConvertida = dataInicioAbreviada.ToString("yyyy-MM-dd");
+
+            string dataFim = BoxDataFim.Text;
+            DateTime dataFimAbreviada = DateTime.Parse(dataFim);
+            string dataFimConvertida = dataInicioAbreviada.ToString("yyyy-MM-dd");
+
+            MessageBox.Show(dataFimConvertida);
             conexaoBanco();
 
-            using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
+            using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
             {
                 try
                 {
-                    conexao.Open();
-                    string script = "SELECT * FROM historico_anual";
+                    conn.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(script, conexao);
-                    MySqlDataAdapter adaptar = new MySqlDataAdapter(cmd);
-                    DataTable tabela_anual = new DataTable();
-                    adaptar.Fill(tabela_anual);
+                    string select = "SELECT cad_peso.peso, cad_peso.data, tb_func.nome_do_funcionario, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data BETWEEN @data_inicio AND @data_fim";
+                    MySqlCommand cmd = new MySqlCommand(select, conn);
+                    cmd.Parameters.AddWithValue("@data_inicio", dataInicioConvertida);
+                    cmd.Parameters.AddWithValue("@data_fim", dataFimConvertida);
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
+                    DataTable tabela = new DataTable();
+                    adaptador.Fill(tabela);
 
-                    TabelaHistorico.DataSource = tabela_anual;
-                    conexao.Close();
+                    TabelaHistorico.DataSource = tabela;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+        }
+
+        private void BoxDataFim_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

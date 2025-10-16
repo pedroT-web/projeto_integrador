@@ -101,7 +101,7 @@
             this.BotaoHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
             this.BotaoHistorico.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BotaoHistorico.ForeColor = System.Drawing.Color.White;
-            this.BotaoHistorico.Location = new System.Drawing.Point(1298, 143);
+            this.BotaoHistorico.Location = new System.Drawing.Point(1298, 138);
             this.BotaoHistorico.Name = "BotaoHistorico";
             this.BotaoHistorico.Size = new System.Drawing.Size(145, 41);
             this.BotaoHistorico.TabIndex = 3;
@@ -113,9 +113,9 @@
             // 
             this.TabelaHistorico.AllowUserToOrderColumns = true;
             this.TabelaHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TabelaHistorico.Location = new System.Drawing.Point(383, 197);
+            this.TabelaHistorico.Location = new System.Drawing.Point(555, 197);
             this.TabelaHistorico.Name = "TabelaHistorico";
-            this.TabelaHistorico.Size = new System.Drawing.Size(809, 625);
+            this.TabelaHistorico.Size = new System.Drawing.Size(574, 625);
             this.TabelaHistorico.TabIndex = 4;
             this.TabelaHistorico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -148,6 +148,7 @@
             this.BoxDataFim.Name = "BoxDataFim";
             this.BoxDataFim.Size = new System.Drawing.Size(335, 26);
             this.BoxDataFim.TabIndex = 21;
+            this.BoxDataFim.ValueChanged += new System.EventHandler(this.BoxDataFim_ValueChanged);
             // 
             // label1
             // 
