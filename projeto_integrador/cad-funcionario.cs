@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace projeto_integrador
 {
@@ -20,9 +21,16 @@ namespace projeto_integrador
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string nomeFuncionario = textBoxNomeFunc.Text;
-
             string conexaoBanco = "server=localhost;user id=root;password=;database=projeto_integrador";
+
+
+            string nomeFuncionario = textBoxNomeFunc.Text;
+            bool validarFuncionario = Regex.IsMatch(nomeFuncionario, @"^[A-Za-zÀ-ÿ\s]+$");
+            if (!validarFuncionario)
+            {
+                MessageBox.Show("Digite apenas letras", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             using (MySqlConnection conn = new MySqlConnection(conexaoBanco))
             {
@@ -34,14 +42,24 @@ namespace projeto_integrador
                     cmd.Parameters.AddWithValue("@nome", nomeFuncionario);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Funcionário Cadastrado Com Sucesso!!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    this.Close();
+                    textBoxNomeFunc.Clear();
+                    conn.Close();
                 }
                 catch (Exception ex){
                    MessageBox.Show("ERRO DE CONEXÃO COM O BANCO DE DADOS: \n{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
+        }
+
+        private void cad_funcionario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

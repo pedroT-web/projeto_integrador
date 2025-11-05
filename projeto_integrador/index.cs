@@ -57,5 +57,75 @@ namespace projeto_integrador
             acessarIndex.Show();
             this.Close();
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void cadastrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pesagemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            pesagem acessarPesagem = new pesagem();
+            acessarPesagem.Show();
+        }
+
+        private void históricoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            historico acessarHistorico = new historico();
+            acessarHistorico.Show();
+            this.Close();
+        }
+
+        private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cad_funcionario acessarCad = new cad_funcionario();
+            acessarCad.ShowDialog();
+        }
+
+        private void cadastroToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            cad_material cadastrarMate = new cad_material();
+            cadastrarMate.ShowDialog();
+        }
+
+        private void históricoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            historico acessarHistorico = new historico();
+            acessarHistorico.Show();
+        }
+
+        private void ediçãoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            editar_materiais acessarEditMate = new editar_materiais();
+            acessarEditMate.ShowDialog();
+        }
+
+        private void ediçãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editar_funcionarios acessarEditFunc = new editar_funcionarios();
+            acessarEditFunc.ShowDialog();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void inícioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

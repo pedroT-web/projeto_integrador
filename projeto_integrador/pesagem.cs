@@ -11,6 +11,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace projeto_integrador
 {
@@ -25,10 +26,9 @@ namespace projeto_integrador
         {
             DateTime dataAtual = DateTime.Now;
 
-
             CarregarComboBoxFuncionario();
 
-            CarregarComboBoxMaterial();
+            carregarComboBoxMaterial();
 
             conexaoBanco();
 
@@ -37,7 +37,7 @@ namespace projeto_integrador
                 try
                 {
                     conexao.Open();
-                    string select = "SELECT cad_peso.id, cad_peso.peso,cad_peso.data, tb_func.nome_do_funcionario, tb_func.id_funcionario, tb_mate.id_material, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data";
+                    string select = "SELECT cad_peso.peso, cad_peso.data, tb_func.nome_do_funcionario, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data";
 
 
                     MySqlCommand cmd = new MySqlCommand(select, conexao);
@@ -58,29 +58,8 @@ namespace projeto_integrador
 
             }
 
-
-
-
             carregarComboBoxMaterial();
             carregarGrid();
-
-
-            //using (MySqlConnection conexaoFuncionarios = new MySqlConnection(conexaoBanco()))
-            //{
-            //    try
-            //    {
-            //        conexaoFuncionarios.Open();
-            //        string selectFuncionarios = "SELECT * FROM tb_funcionario";
-            //        MySqlCommand cmdFuncionarios = new MySqlCommand(selectFuncionarios, conexaoFuncionarios);
-            //        MySqlDataAdapter adaptarSelect = new MySqlDataAdapter();
-            //        comboBoxFuncionario.DataSource = adaptarSelect;
-            //        conexaoFuncionarios.Close();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Erro de conexão com o banco de dados" + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
 
         }
 
@@ -141,27 +120,59 @@ namespace projeto_integrador
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int funcionario = Convert.ToInt32(comboBoxFuncionario.SelectedValue);
-            int material = Convert.ToInt32(comboBoxMaterial.SelectedValue);
+            string funcionario = Convert.ToString(comboBoxFuncionario.SelectedValue);
+            int id_funcionario = 0;
 
+            string material = Convert.ToString(comboBoxMaterial.SelectedValue);
+            int id_material = 0;
 
-            double peso = 0;
-
-
-
-            peso = Convert.ToDouble(textBoxPeso.Text);
+            string peso = "";
+            peso = Convert.ToString(textBoxPeso.Text);
+            double peso_convertido = 0;
+            bool validarPeso = Regex.IsMatch(peso, @"^\d+([.,]\d+)?$");
 
             string data = BoxData.Text;
 
-            if (comboBoxTipoPeso.Text == "G")
+
+            if (funcionario == "")
             {
-                double pesoG = Convert.ToDouble(textBoxPeso.Text);
-                peso = pesoG / 1000;
+                MessageBox.Show("Selecione um funcionário na lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
             else
             {
-                peso = Convert.ToDouble(textBoxPeso.Text);
+                id_funcionario = Convert.ToInt32(funcionario);
+
             }
+
+
+            if (material == "")
+            {
+                MessageBox.Show("Selecione um material na lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                id_material = Convert.ToInt32(material);
+            }
+
+
+            if (peso == "")
+            {
+                MessageBox.Show("Digite o peso", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }else if (!validarPeso)
+            {
+                MessageBox.Show("peso inválido, é aceito apenas números", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                peso_convertido = Convert.ToDouble(peso);
+            }
+
+
+
 
             DateTime dataAbreviada = DateTime.Parse(data);
             string dataConvertida = dataAbreviada.ToString("yyyy-MM-dd");
@@ -183,12 +194,12 @@ namespace projeto_integrador
                         string insert = "INSERT INTO cadastro_de_peso(peso, id_funcionarios, id_material, data) VALUES (@peso, @funcionario, @id_material ,@data_cadastro)";
                         MySqlCommand cmd = new MySqlCommand(insert, conn);
 
-                        cmd.Parameters.AddWithValue("@peso", peso);
-                        cmd.Parameters.AddWithValue("@funcionario", funcionario);
+                        cmd.Parameters.AddWithValue("@peso", peso_convertido);
+                        cmd.Parameters.AddWithValue("@funcionario", id_funcionario);
 
                         cmd.Parameters.AddWithValue("@data", dataConvertida);
 
-                        cmd.Parameters.AddWithValue("@id_material", material);
+                        cmd.Parameters.AddWithValue("@id_material", id_material);
                         cmd.Parameters.AddWithValue("@data_cadastro", dataConvertida);
 
                         cmd.ExecuteNonQuery();
@@ -234,6 +245,12 @@ namespace projeto_integrador
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
                     DataTable tabela = new DataTable();
                     adaptador.Fill(tabela);
+
+                    DataRow linhaVazia = tabela.NewRow(); // Nova linha de dados vazia utilizando a mesma estrutura da tabela declarada anteriormente
+                    linhaVazia["id_funcionario"] = DBNull.Value; // define o valor da coluna id_funcionario como nulo
+                    linhaVazia["nome_do_funcionario"] = ""; // define o valor da coluna nome_do_funcionario como vazio
+                    tabela.Rows.InsertAt(linhaVazia, 0); // Insere a nova linha vazia no indice 0 da comboBox
+
                     comboBoxFuncionario.ValueMember = "id_funcionario";
                     comboBoxFuncionario.DisplayMember = "nome_do_funcionario";
                     comboBoxFuncionario.DataSource = tabela;
@@ -243,30 +260,12 @@ namespace projeto_integrador
                 catch (Exception ex)
                 {
 
-                    // consulta da tabela do banco 
-                    //string query = "SELECT id_funcionario, nome_do_funcionario FROM tb_funcionarios";
-                    //MySqlCommand cmd = new MySqlCommand(query, conn);
-                    //MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
-                    //DataTable tabela = new DataTable();
-                    //adaptador.Fill(tabela);
-
-                    //DataRow linhaVazia = tabela.NewRow();
-                    //linhaVazia["id_funcionario"] = DBNull.Value;
-                    //linhaVazia["nome_do_funcionario"] = ""; // Ou "Selecione..."
-                    //tabela.Rows.InsertAt(linhaVazia, 0);
-
-                    //comboBoxFuncionario.ValueMember = "id_funcionario";
-                    //comboBoxFuncionario.DisplayMember = "nome_do_funcionario";
-                    //comboBoxFuncionario.DataSource = tabela;
-
-
-
                     MessageBox.Show("Erro ao carregar a lista de clientes: " + ex.Message);
                 }
             }
         }
 
-        private void CarregarComboBoxMaterial()
+        private void carregarComboBoxMaterial()
         {
             conexaoBanco();
             using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
@@ -279,6 +278,12 @@ namespace projeto_integrador
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
                     DataTable tabela = new DataTable();
                     adaptador.Fill(tabela);
+
+                    DataRow linhaVazia = tabela.NewRow(); // Nova linha de dados vazia utilizando a mesma estrutura da tabela declarada anteriormente
+                    linhaVazia["id_material"] = DBNull.Value; // define o valor da coluna id_funcionario como nulo
+                    linhaVazia["nome_material"] = ""; // define o valor da coluna nome_do_funcionario como vazio
+                    tabela.Rows.InsertAt(linhaVazia, 0); // Insere a nova linha vazia no indice 0 da comboBox
+
                     comboBoxMaterial.ValueMember = "id_material";
                     comboBoxMaterial.DisplayMember = "nome_material";
                     comboBoxMaterial.DataSource = tabela;
@@ -292,6 +297,7 @@ namespace projeto_integrador
 
         private void button5_Click_1(object sender, EventArgs e)
         {
+            this.Close();
             cad_funcionario acessarCad = new cad_funcionario();
             acessarCad.Show();
         }
@@ -303,42 +309,9 @@ namespace projeto_integrador
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         { }
-        private void carregarComboBoxMaterial()
-        {
-            using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
-            {
-                try
-                {
-                    conn.Open();
-
-                    string query = "select id_material, nome_material FROM materiais";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
-                    DataTable tabela = new DataTable();
-                    adaptador.Fill(tabela);
-
-                    DataRow linhaVazia = tabela.NewRow(); // Nova linha de dados vazia utilizando a mesma estrutura da tabela declarada anteriormente
-                    linhaVazia["id_material"] = DBNull.Value; // define o valor da coluna id_funcionario como nulo
-                    linhaVazia["nome_material"] = ""; // define o valor da coluna nome_do_funcionario como vazio
-                    tabela.Rows.InsertAt(linhaVazia, 0); // Insere a nova linha vazia no indice 0 da comboBox
-
-                    comboBoxMaterial.DataSource = tabela; // Define a fonte de dados da comboBox
-                    comboBoxMaterial.ValueMember = "id_material"; // Define qual a coluna da fonte de dados que vamos utilizar como o valor interno dos itens do comboBox
-                    comboBoxMaterial.DisplayMember = "nome_material"; // Define qual a coluna da fonte de dados que vamos utilizar como valor externo dos itens da comboBox
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro de conexão com o banco de dados " + ex.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-        }
 
         private void carregarGrid()
         {
-
-
-
             // Pega a data do dia atua
             DateTime dataAtual = DateTime.Now;
 
@@ -351,7 +324,7 @@ namespace projeto_integrador
                 try
                 {
                     conexao.Open();
-                    string select = "SELECT cad_peso.id, cad_peso.peso,cad_peso.data, tb_func.nome_do_funcionario, tb_func.id_funcionario, tb_mate.id_material, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data ORDER BY id";
+                    string select = "SELECT cad_peso.peso,cad_peso.data, tb_func.nome_do_funcionario, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data = @data ORDER BY id";
 
                     MySqlCommand cmd = new MySqlCommand(select, conexao);
                     cmd.Parameters.AddWithValue("@data", dataFormatada);
@@ -370,6 +343,18 @@ namespace projeto_integrador
 
 
             }
+        }
+
+        private void buttonCadMaterial_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            cad_material cadastrarMate = new cad_material();
+            cadastrarMate.ShowDialog();
+        }
+
+        private void BoxData_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

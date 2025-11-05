@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace projeto_integrador
 {
@@ -119,6 +120,8 @@ namespace projeto_integrador
         {
             carregarPeriodo();
 
+            this.Refresh();
+
             //conexaoBanco();
 
             //using (MySqlConnection conexao = new MySqlConnection(conexaoBanco()))
@@ -151,9 +154,8 @@ namespace projeto_integrador
 
             string dataFim = BoxDataFim.Text;
             DateTime dataFimAbreviada = DateTime.Parse(dataFim);
-            string dataFimConvertida = dataInicioAbreviada.ToString("yyyy-MM-dd");
+            string dataFimConvertida = dataFimAbreviada.ToString("yyyy-MM-dd");
 
-            MessageBox.Show(dataFimConvertida);
             conexaoBanco();
 
             using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
@@ -162,7 +164,7 @@ namespace projeto_integrador
                 {
                     conn.Open();
 
-                    string select = "SELECT cad_peso.peso, cad_peso.data, tb_func.nome_do_funcionario, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data BETWEEN @data_inicio AND @data_fim";
+                    string select = "SELECT cad_peso.id, cad_peso.peso, cad_peso.data, tb_func.nome_do_funcionario, tb_mate.nome_material FROM cadastro_de_peso AS cad_peso INNER JOIN tb_funcionarios AS tb_func ON tb_func.id_funcionario = cad_peso.id_funcionarios INNER JOIN materiais AS tb_mate ON tb_mate.id_material = cad_peso.id_material WHERE data BETWEEN @data_inicio AND @data_fim";
                     MySqlCommand cmd = new MySqlCommand(select, conn);
                     cmd.Parameters.AddWithValue("@data_inicio", dataInicioConvertida);
                     cmd.Parameters.AddWithValue("@data_fim", dataFimConvertida);
@@ -183,6 +185,96 @@ namespace projeto_integrador
         private void BoxDataFim_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void fnDeletarRegistro()
+        {
+            if (TabelaHistorico.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione o registro que deseja deletar", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataGridViewRow registroSelecionado = TabelaHistorico.SelectedRows[0];
+            int idRegistro = Convert.ToInt32(registroSelecionado.Cells["id"].Value);
+
+            DialogResult confirmacao = MessageBox.Show("Realmente deseja deletar o registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmacao == DialogResult.Yes)
+            {
+                conexaoBanco();
+                using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
+                {
+                    try
+                    {
+                        conn.Open();
+                        string delete = "DELETE FROM cadastro_de_peso WHERE id = @id";
+                        MySqlCommand cmd = new MySqlCommand(delete, conn);
+                        cmd.Parameters.AddWithValue("@id", idRegistro);
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Registro deletado", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        carregarPeriodo();
+                        conn.Close();
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao deletar registro, erro na conexão com o banco de dado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            fnDeletarRegistro();
+        }
+
+        private void fnDeletarPeriodo()
+        {
+            string dataInicio = BoxDataInicio.Text;
+            DateTime dataInicioAbreviada = DateTime.Parse(dataInicio); // Transforma em número, o que vinha em texto
+            string dataInicioConvertida = dataInicioAbreviada.ToString("yyyy-MM-dd"); // deixa no formato informado
+
+            string dataFim = BoxDataFim.Text;
+            DateTime dataFimAbreviada = DateTime.Parse(dataFim);
+            string dataFimConvertida = dataFimAbreviada.ToString("yyyy-MM-dd");
+
+            DialogResult confirmacao = MessageBox.Show("Realmente deseja deletar os dados no periodo de: " + dataInicio + " Até: " + dataFim, "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmacao == DialogResult.Yes)
+            {
+                conexaoBanco();
+                using (MySqlConnection conn = new MySqlConnection(conexaoBanco()))
+                {
+                    try
+                    {
+                        conn.Open();
+                        string delete = "DELETE FROM cadastro_de_peso WHERE data BETWEEN @dataInicio AND @dataFim";
+                        MySqlCommand cmd = new MySqlCommand(delete, conn);
+                        cmd.Parameters.AddWithValue("@dataInicio", dataInicioConvertida);
+                        cmd.Parameters.AddWithValue("@dataFim", dataFimConvertida);
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Período deletado", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao deletar Periodo, erro na conexão com o banco de dado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            fnDeletarPeriodo();
+            carregarPeriodo();
         }
     }
 }

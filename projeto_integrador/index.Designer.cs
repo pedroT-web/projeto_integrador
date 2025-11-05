@@ -32,12 +32,18 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.botaoPesagem = new System.Windows.Forms.Button();
-            this.botaoHistorico = new System.Windows.Forms.Button();
-            this.botaoInicio = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.inícioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pesagemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.históricoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ediçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ediçãoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -76,59 +82,87 @@
             this.label2.Text = "Sistema de reciclagem do senac";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // botaoPesagem
+            // menuStrip1
             // 
-            this.botaoPesagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.botaoPesagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botaoPesagem.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botaoPesagem.ForeColor = System.Drawing.Color.White;
-            this.botaoPesagem.Location = new System.Drawing.Point(697, 29);
-            this.botaoPesagem.Name = "botaoPesagem";
-            this.botaoPesagem.Size = new System.Drawing.Size(112, 34);
-            this.botaoPesagem.TabIndex = 18;
-            this.botaoPesagem.Text = "Pesagem";
-            this.botaoPesagem.UseVisualStyleBackColor = false;
-            this.botaoPesagem.Click += new System.EventHandler(this.button4_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inícioToolStripMenuItem,
+            this.pesagemToolStripMenuItem,
+            this.históricoToolStripMenuItem,
+            this.cadastrosToolStripMenuItem,
+            this.materialToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1604, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // botaoHistorico
+            // inícioToolStripMenuItem
             // 
-            this.botaoHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.botaoHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botaoHistorico.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botaoHistorico.ForeColor = System.Drawing.Color.White;
-            this.botaoHistorico.Location = new System.Drawing.Point(851, 29);
-            this.botaoHistorico.Name = "botaoHistorico";
-            this.botaoHistorico.Size = new System.Drawing.Size(112, 34);
-            this.botaoHistorico.TabIndex = 17;
-            this.botaoHistorico.Text = "Histórico";
-            this.botaoHistorico.UseVisualStyleBackColor = false;
-            this.botaoHistorico.Click += new System.EventHandler(this.button3_Click);
+            this.inícioToolStripMenuItem.Name = "inícioToolStripMenuItem";
+            this.inícioToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.inícioToolStripMenuItem.Text = "Sair";
+            this.inícioToolStripMenuItem.Click += new System.EventHandler(this.inícioToolStripMenuItem_Click);
             // 
-            // botaoInicio
+            // pesagemToolStripMenuItem
             // 
-            this.botaoInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.botaoInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botaoInicio.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botaoInicio.ForeColor = System.Drawing.Color.White;
-            this.botaoInicio.Location = new System.Drawing.Point(537, 29);
-            this.botaoInicio.Name = "botaoInicio";
-            this.botaoInicio.Size = new System.Drawing.Size(112, 34);
-            this.botaoInicio.TabIndex = 16;
-            this.botaoInicio.Text = "Início";
-            this.botaoInicio.UseVisualStyleBackColor = false;
-            this.botaoInicio.Click += new System.EventHandler(this.button2_Click);
+            this.pesagemToolStripMenuItem.Name = "pesagemToolStripMenuItem";
+            this.pesagemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.pesagemToolStripMenuItem.Text = "Pesagem";
+            this.pesagemToolStripMenuItem.Click += new System.EventHandler(this.pesagemToolStripMenuItem_Click);
             // 
-            // panel1
+            // históricoToolStripMenuItem
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
-            this.panel1.Controls.Add(this.botaoPesagem);
-            this.panel1.Controls.Add(this.botaoHistorico);
-            this.panel1.Controls.Add(this.botaoInicio);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1608, 101);
-            this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.históricoToolStripMenuItem.Name = "históricoToolStripMenuItem";
+            this.históricoToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.históricoToolStripMenuItem.Text = "Histórico";
+            this.históricoToolStripMenuItem.Click += new System.EventHandler(this.históricoToolStripMenuItem_Click_1);
+            // 
+            // cadastrosToolStripMenuItem
+            // 
+            this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastroToolStripMenuItem,
+            this.ediçãoToolStripMenuItem});
+            this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
+            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.cadastrosToolStripMenuItem.Text = "Funcionários";
+            this.cadastrosToolStripMenuItem.Click += new System.EventHandler(this.cadastrosToolStripMenuItem_Click);
+            // 
+            // cadastroToolStripMenuItem
+            // 
+            this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
+            this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.cadastroToolStripMenuItem.Text = "Cadastro";
+            this.cadastroToolStripMenuItem.Click += new System.EventHandler(this.cadastroToolStripMenuItem_Click);
+            // 
+            // ediçãoToolStripMenuItem
+            // 
+            this.ediçãoToolStripMenuItem.Name = "ediçãoToolStripMenuItem";
+            this.ediçãoToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.ediçãoToolStripMenuItem.Text = "Edição";
+            this.ediçãoToolStripMenuItem.Click += new System.EventHandler(this.ediçãoToolStripMenuItem_Click);
+            // 
+            // materialToolStripMenuItem
+            // 
+            this.materialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastroToolStripMenuItem1,
+            this.ediçãoToolStripMenuItem1});
+            this.materialToolStripMenuItem.Name = "materialToolStripMenuItem";
+            this.materialToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.materialToolStripMenuItem.Text = "Materiais";
+            // 
+            // cadastroToolStripMenuItem1
+            // 
+            this.cadastroToolStripMenuItem1.Name = "cadastroToolStripMenuItem1";
+            this.cadastroToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.cadastroToolStripMenuItem1.Text = "Cadastro";
+            this.cadastroToolStripMenuItem1.Click += new System.EventHandler(this.cadastroToolStripMenuItem1_Click);
+            // 
+            // ediçãoToolStripMenuItem1
+            // 
+            this.ediçãoToolStripMenuItem1.Name = "ediçãoToolStripMenuItem1";
+            this.ediçãoToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.ediçãoToolStripMenuItem1.Text = "Edição";
+            this.ediçãoToolStripMenuItem1.Click += new System.EventHandler(this.ediçãoToolStripMenuItem1_Click);
             // 
             // index
             // 
@@ -139,14 +173,15 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(141)))));
             this.Name = "index";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,10 +191,16 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button botaoPesagem;
-        private System.Windows.Forms.Button botaoHistorico;
-        private System.Windows.Forms.Button botaoInicio;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem pesagemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem históricoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ediçãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem materialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ediçãoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem inícioToolStripMenuItem;
     }
 }
 

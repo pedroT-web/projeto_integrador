@@ -104,6 +104,24 @@
     <Compile Include="cad-funcionario.Designer.cs">
       <DependentUpon>cad-funcionario.cs</DependentUpon>
     </Compile>
+    <Compile Include="cad-material.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cad-material.Designer.cs">
+      <DependentUpon>cad-material.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editar-funcionarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editar-funcionarios.Designer.cs">
+      <DependentUpon>editar-funcionarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editar-materiais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editar-materiais.Designer.cs">
+      <DependentUpon>editar-materiais.cs</DependentUpon>
+    </Compile>
     <Compile Include="historico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +150,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="cad-funcionario.resx">
       <DependentUpon>cad-funcionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cad-material.resx">
+      <DependentUpon>cad-material.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editar-funcionarios.resx">
+      <DependentUpon>editar-funcionarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editar-materiais.resx">
+      <DependentUpon>editar-materiais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="historico.resx">
       <DependentUpon>historico.cs</DependentUpon>

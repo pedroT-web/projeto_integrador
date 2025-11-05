@@ -34,12 +34,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonSair = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxNomeFunc
             // 
             this.textBoxNomeFunc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNomeFunc.Location = new System.Drawing.Point(57, 169);
+            this.textBoxNomeFunc.Location = new System.Drawing.Point(12, 90);
             this.textBoxNomeFunc.Name = "textBoxNomeFunc";
             this.textBoxNomeFunc.Size = new System.Drawing.Size(324, 29);
             this.textBoxNomeFunc.TabIndex = 0;
@@ -53,7 +54,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(53, 143);
+            this.label1.Location = new System.Drawing.Point(8, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(163, 23);
             this.label1.TabIndex = 2;
@@ -65,7 +66,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(391, 279);
+            this.button5.Location = new System.Drawing.Point(158, 138);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(178, 34);
             this.button5.TabIndex = 21;
@@ -83,11 +84,27 @@
             this.label2.TabIndex = 22;
             this.label2.Text = "Cadastro de Funcionários";
             // 
+            // buttonSair
+            // 
+            this.buttonSair.BackColor = System.Drawing.Color.Red;
+            this.buttonSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSair.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSair.ForeColor = System.Drawing.Color.White;
+            this.buttonSair.Location = new System.Drawing.Point(500, 297);
+            this.buttonSair.Name = "buttonSair";
+            this.buttonSair.Size = new System.Drawing.Size(93, 34);
+            this.buttonSair.TabIndex = 23;
+            this.buttonSair.Text = "Sair";
+            this.buttonSair.UseVisualStyleBackColor = false;
+            this.buttonSair.Click += new System.EventHandler(this.buttonSair_Click);
+            // 
             // cad_funcionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 343);
+            this.ControlBox = false;
+            this.Controls.Add(this.buttonSair);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label1);
@@ -95,6 +112,7 @@
             this.Name = "cad_funcionario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "cad_funcionario";
+            this.Load += new System.EventHandler(this.cad_funcionario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,5 +125,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonSair;
     }
 }
