@@ -39,7 +39,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(161, 18);
+            this.label2.Location = new System.Drawing.Point(80, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(226, 31);
             this.label2.TabIndex = 26;
@@ -84,7 +84,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(399, 305);
+            this.button1.Location = new System.Drawing.Point(224, 311);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 34);
             this.button1.TabIndex = 27;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 372);
+            this.ClientSize = new System.Drawing.Size(441, 372);
             this.ControlBox = false;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);

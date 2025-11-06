@@ -56,12 +56,13 @@
             this.buttonDeletar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDeletar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDeletar.ForeColor = System.Drawing.Color.White;
-            this.buttonDeletar.Location = new System.Drawing.Point(658, 165);
+            this.buttonDeletar.Location = new System.Drawing.Point(658, 161);
             this.buttonDeletar.Name = "buttonDeletar";
             this.buttonDeletar.Size = new System.Drawing.Size(93, 34);
             this.buttonDeletar.TabIndex = 31;
-            this.buttonDeletar.Text = "Deletar";
+            this.buttonDeletar.Text = "Desativar";
             this.buttonDeletar.UseVisualStyleBackColor = false;
+            this.buttonDeletar.Click += new System.EventHandler(this.buttonDeletar_Click);
             // 
             // buttonSair
             // 

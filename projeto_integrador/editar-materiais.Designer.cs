@@ -50,9 +50,9 @@
             // 
             this.GridMateriais.AllowUserToOrderColumns = true;
             this.GridMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridMateriais.Location = new System.Drawing.Point(253, 88);
+            this.GridMateriais.Location = new System.Drawing.Point(237, 88);
             this.GridMateriais.Name = "GridMateriais";
-            this.GridMateriais.Size = new System.Drawing.Size(251, 207);
+            this.GridMateriais.Size = new System.Drawing.Size(285, 249);
             this.GridMateriais.TabIndex = 24;
             this.GridMateriais.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -80,7 +80,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 34);
             this.button1.TabIndex = 26;
-            this.button1.Text = "Deletar";
+            this.button1.Text = "Desativar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

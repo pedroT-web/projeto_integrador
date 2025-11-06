@@ -240,7 +240,7 @@ namespace projeto_integrador
                 {
                     conn.Open();
                     // 2.a consulta da tabela do banco 
-                    string query = "SELECT nome_do_funcionario, id_funcionario FROM tb_funcionarios";
+                    string query = "SELECT nome_do_funcionario, id_funcionario FROM tb_funcionarios WHERE ativado = 'Ativo'";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
                     DataTable tabela = new DataTable();
@@ -273,7 +273,7 @@ namespace projeto_integrador
                 try
                 {
                     conn.Open();
-                    string consulta = "SELECT nome_material, id_material FROM materiais";
+                    string consulta = "SELECT nome_material, id_material FROM materiais WHERE ativado = 'Ativo'";
                     MySqlCommand cmd = new MySqlCommand(consulta, conn);
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
                     DataTable tabela = new DataTable();

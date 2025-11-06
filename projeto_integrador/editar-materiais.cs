@@ -66,6 +66,15 @@ namespace projeto_integrador
                 DataGridViewRow materialSelecionado = GridMateriais.SelectedRows[0];
                 int idMaterial = Convert.ToInt32(materialSelecionado.Cells["id_material"].Value);
                 string nomeMaterial = Convert.ToString(materialSelecionado.Cells["nome_material"].Value);
+                string status = Convert.ToString(materialSelecionado.Cells["ativado"].Value);
+
+                string textoStatus = char.ToUpper(status[0]) + status.Substring(1);
+
+                if (textoStatus != "Ativo" && textoStatus != "Desativo")
+                {
+                    MessageBox.Show("O status deve ser (Ativo) ou (Desativo)", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
                 DialogResult confirmacao = MessageBox.Show("Deseja Realmente alterar o material " + nomeMaterial + "?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -77,8 +86,9 @@ namespace projeto_integrador
                         try
                         {
                             conn.Open();
-                            string update = "UPDATE materiais SET nome_material = @novo_nome WHERE id_material = @id";
+                            string update = "UPDATE materiais SET nome_material = @novo_nome, ativado = @status WHERE id_material = @id";
                             MySqlCommand cmd = new MySqlCommand(update, conn);
+                            cmd.Parameters.AddWithValue("@status", textoStatus);
                             cmd.Parameters.AddWithValue("@novo_nome", nomeMaterial);
                             cmd.Parameters.AddWithValue("@id", idMaterial);
                             cmd.ExecuteNonQuery();
@@ -120,13 +130,13 @@ namespace projeto_integrador
                         try
                         {
                             conn.Open();
-                            string delete = "DELETE FROM materiais WHERE id_material = @id";
+                            string delete = "UPDATE materiais SET ativado = 'Desativo' WHERE id_material = @id";
                             MySqlCommand cmd = new MySqlCommand(delete, conn);
                             cmd.Parameters.AddWithValue("@id", idMaterial);
                             cmd.ExecuteNonQuery();
 
 
-                            MessageBox.Show("Material Deletado", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Material Desativado", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             conn.Close();
                         }
@@ -138,6 +148,10 @@ namespace projeto_integrador
 
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("Selecione um registro para executar a alteração", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -40,9 +40,9 @@
             // textBoxNomeFunc
             // 
             this.textBoxNomeFunc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNomeFunc.Location = new System.Drawing.Point(12, 90);
+            this.textBoxNomeFunc.Location = new System.Drawing.Point(12, 111);
             this.textBoxNomeFunc.Name = "textBoxNomeFunc";
-            this.textBoxNomeFunc.Size = new System.Drawing.Size(324, 29);
+            this.textBoxNomeFunc.Size = new System.Drawing.Size(348, 29);
             this.textBoxNomeFunc.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -54,7 +54,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 64);
+            this.label1.Location = new System.Drawing.Point(8, 85);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(163, 23);
             this.label1.TabIndex = 2;
@@ -66,7 +66,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(158, 138);
+            this.button5.Location = new System.Drawing.Point(182, 160);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(178, 34);
             this.button5.TabIndex = 21;
@@ -78,7 +78,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(137, 22);
+            this.label2.Location = new System.Drawing.Point(74, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(263, 31);
             this.label2.TabIndex = 22;
@@ -90,7 +90,7 @@
             this.buttonSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSair.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSair.ForeColor = System.Drawing.Color.White;
-            this.buttonSair.Location = new System.Drawing.Point(500, 297);
+            this.buttonSair.Location = new System.Drawing.Point(267, 297);
             this.buttonSair.Name = "buttonSair";
             this.buttonSair.Size = new System.Drawing.Size(93, 34);
             this.buttonSair.TabIndex = 23;
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 343);
+            this.ClientSize = new System.Drawing.Size(435, 355);
             this.ControlBox = false;
             this.Controls.Add(this.buttonSair);
             this.Controls.Add(this.label2);
