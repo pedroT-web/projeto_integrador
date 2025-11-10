@@ -114,7 +114,7 @@
             this.Name = "editar_materiais";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "editar_materiais";
-            this.Load += new System.EventHandler(this.button1_Click);
+            this.Load += new System.EventHandler(this.button2_Click);
             ((System.ComponentModel.ISupportInitialize)(this.GridMateriais)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

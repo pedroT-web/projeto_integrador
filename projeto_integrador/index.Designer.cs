@@ -63,7 +63,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(539, 580);
+            this.label1.Location = new System.Drawing.Point(565, 686);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(554, 75);
             this.label1.TabIndex = 2;
@@ -75,7 +75,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(182)))), ((int)(((byte)(209)))));
-            this.label2.Location = new System.Drawing.Point(282, 655);
+            this.label2.Location = new System.Drawing.Point(308, 761);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1024, 75);
             this.label2.TabIndex = 3;
